@@ -29,12 +29,14 @@ async def homepage(request):
     p_table = select(Project)
     projects = session.execute(p_table).scalars().all()
 
-    return Jinja2Templates("templates").TemplateResponse(
-        "index.html", {"request": request, "projects" : projects }
-
-
-        
-    )
+    return templates.TemplateResponse(
+    request=request, 
+    name="index.html", 
+    context={ {"request": request, "projects" : projects }  }
+)
+#    return Jinja2Templates("templates").TemplateResponse(
+#        "index.html", {"request": request, "projects" : projects }
+#   )
 
 # project page
 async def get_project(request):
