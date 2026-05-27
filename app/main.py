@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, select, delete
 from sqlalchemy.orm import Session
 
 from starlette.applications import Starlette
-from starlette.responses import JSONResponse, PlainTextResponse, RedirectResponse
+from starlette.responses import JSONResponse, PlainTextResponse, RedirectResponse, HTMLResponse
 
 from starlette.requests import Request
 from starlette.routing import Route, Mount
@@ -131,15 +131,41 @@ async def get_node_type_list(request):
     return Jinja2Templates("templates").TemplateResponse(
         "node_types.html", {"request": request, "node_types" : node_types, }
     )
+    
 # test page
 async def get_test(request):
     
     return PlainTextResponse("Test!")
+# test page template
+async def get_test2(request):
+    
+    # Define your template directly as a raw Python string
+    template_str = """
+    <!DOCTYPE html>
+    <html>
+    <head><title>Inline Template</title></head>
+    <body>
+        <h1>Hello, {{ name }}!</h1>
+        <p>Welcome to Starlette without external HTML files.</p>
+    </body>
+    </html>
+    """
+
+    # Compile the template string dynamically
+    template = jinja2.Template(template_str)
+
+    # Render the dynamic content with your context variables
+    rendered_html = template.render(name="Developer")
+
+    # Return the final content inside an HTMLResponse
+    return HTMLResponse(content=rendered_html, status_code=200)
+
 
 app = Starlette(
     routes=[
         Route("/", homepage),
         Route("/test", get_test ),
+        Route("/test2", get_test2 ),
         Route("/view/project/{project_id}", get_project),
         Route("/view/project/{project_id}/calc", calc_project),
         Route("/view/products", get_product_list),
