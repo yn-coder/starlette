@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+    {{ super() }}
+
+	<h1>Products</h1>	
+	
+	
+	
+	<table>
+		<thead>
+			<th>Name</th>
+			<th>Out cost</th>			
+		</thead>
+		<tbody>
+			{% for p in products %}
+			<tr>
+			  <td>{{p.full_name}}</td>
+			  <td>{{p.out_cost}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+{% endblock %}

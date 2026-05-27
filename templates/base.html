@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept models</title>
+    <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css">
+	    
+	{% block links %}
+    {% endblock %}
+	
+</head>
+<body>
+  <header>
+    <h1>Start</h1>
+    <p>Concept models</p><nav>
+  
+  
+  <a href="/">Home</a>
+  <a href="/view/products/">Products</a>
+  <a href="/view/node_types/">Node types</a>
+  <a href="/admin">Control panel</a>
+</nav>
+	
+	
+	
+  </header>
+
+  <main>
+    {% block main %}
+    {% endblock %}
+	
+  </main>
+
+  <footer>
+    <p>Concept.</p>
+  </footer>
+</body>
+</html>
