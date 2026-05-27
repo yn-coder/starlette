@@ -11,6 +11,7 @@ from starlette.staticfiles import StaticFiles
 
 from starlette_admin.contrib.sqla import Admin, ModelView
 from starlette_admin.views import Link
+import jinja2
 
 from .models import *
 from datetime import datetime
