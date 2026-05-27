@@ -33,10 +33,8 @@ async def homepage(request):
     request=request, 
     name="index.html", 
     context={  "projects" : projects  }
-)
-#    return Jinja2Templates("templates").TemplateResponse(
-#        "index.html", {"request": request, "projects" : projects }
-#   )
+    )
+
 
 # project page
 async def get_project(request):
@@ -136,10 +134,12 @@ async def get_node_type_list(request):
     p_table = select(Node_Type)
     node_types = session.execute(p_table).scalars().all()
 
-    return Jinja2Templates("templates").TemplateResponse(
-        "node_types.html", {"request": request, "node_types" : node_types, }
+    return templates.TemplateResponse(
+    request=request, 
+    name="node_types.html", 
+    context={ "node_types" : node_types }
     )
-    
+
 # test page
 async def get_test(request):
     
