@@ -1,0 +1,4 @@
+starlette
+SQLAlchemy
+starlette-admin
+jinja2
