@@ -78,8 +78,10 @@ async def get_project(request):
         if reg_income > reg_opex:
             project_payback = total_capex / ( reg_income - reg_opex )
     
-    return Jinja2Templates("templates").TemplateResponse(
-        "project.html", { "request": request, "project" : project, "project_nodes" : project_nodes, 
+    return templates.TemplateResponse(
+    request=request, 
+    name="project.html", 
+    context={   "project" : project, "project_nodes" : project_nodes, 
                           "reg_income" : reg_income, "total_capex" : total_capex, "reg_power_cost" : reg_power_cost, "reg_opex" : reg_opex, "y_rec" : y_rec,
                           "bottleneck_value" : bottleneck_value,
                           "bottleneck_node" : bottleneck_node,
@@ -125,10 +127,12 @@ async def get_product_list(request):
     p_table = select(Product)
     products = session.execute(p_table).scalars().all()
 
-    return Jinja2Templates("templates").TemplateResponse(
-        "products.html", {"request": request, "products" : products, }
+    return templates.TemplateResponse(
+    request=request, 
+    name="products.html", 
+    context={  "products" : products }
     )
-
+    
 # node type list
 async def get_node_type_list(request):
     p_table = select(Node_Type)
