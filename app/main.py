@@ -131,13 +131,15 @@ async def get_node_type_list(request):
     return Jinja2Templates("templates").TemplateResponse(
         "node_types.html", {"request": request, "node_types" : node_types, }
     )
-
+# test page
+async def get_test(request):
+    
+    return PlainTextResponse("Test!")
 
 app = Starlette(
     routes=[
         Route("/", homepage),
-        #Route("/api/data/sensor_logs", endpoint=api_get_sensor_logs ),
-        #Route("/add_log", endpoint=add_log_item, methods=["POST"]),
+        Route("/test", get_test ),
         Route("/view/project/{project_id}", get_project),
         Route("/view/project/{project_id}/calc", calc_project),
         Route("/view/products", get_product_list),
