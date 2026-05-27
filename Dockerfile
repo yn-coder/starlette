@@ -1,7 +1,10 @@
-FROM tiangolo/uvicorn-gunicorn:python3.8-alpine3.10
+FROM python:3.12-slim
 
-LABEL maintainer="Sebastian Ramirez <tiangolo@gmail.com>"
+WORKDIR /
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir uvicorn && pip install --no-cache-dir -r requirements.txt
 
 COPY ./app /app
+
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
