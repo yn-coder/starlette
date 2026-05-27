@@ -32,7 +32,7 @@ async def homepage(request):
     return templates.TemplateResponse(
     request=request, 
     name="index.html", 
-    context={ {"request": request, "projects" : projects }  }
+    context={  "projects" : projects  }
 )
 #    return Jinja2Templates("templates").TemplateResponse(
 #        "index.html", {"request": request, "projects" : projects }
