@@ -86,7 +86,10 @@ Plotly.newPlot('Node_Value_Chart', data_nv, layout_nv);
 	<p>reg opex (include power) : {{"{:_.2f}".format(reg_opex)}}</p>
 
     <p>bottleneck value : {{bottleneck_value}}</p>
+	{% if bottleneck_node %}
     <p>bottleneck node : {{bottleneck_node.node_type.full_name}}</p>
+	{% endif %}
+	
 
 		<table>
 		<thead>
