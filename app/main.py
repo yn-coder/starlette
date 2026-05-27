@@ -18,6 +18,8 @@ from datetime import datetime
 
 engine = create_engine("sqlite:///concepts.db", connect_args={"check_same_thread": False})
 
+templates = Jinja2Templates(directory='templates')
+
 
 Base.metadata.create_all(engine)
 session = Session(engine)
@@ -29,6 +31,9 @@ async def homepage(request):
 
     return Jinja2Templates("templates").TemplateResponse(
         "index.html", {"request": request, "projects" : projects }
+
+
+        
     )
 
 # project page
