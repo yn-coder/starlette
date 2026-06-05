@@ -3,36 +3,34 @@
 {% block main %}
     {{ super() }}
 
-	<h1>Node types</h1>	
-	
-	
-	
+	<h1 class="page-title">Node types</h1>
+
+	<section class="data-section">
+        <div class="section-title">Node types</div>
+        <div class="table-container">
+
 	<table>
 		<thead>
 			<th>Name</th>
-			<th>Input product</th>
-			<th>Output product</th>
 			<th>Value</th>
 			<th>Power</th>
 			<th>CAPEX</th>
 			<th>OPEX</th>
-			
+
 		</thead>
 		<tbody>
 			{% for nt in node_types %}
 			<tr>
-			  <td>{{nt.full_name}}</td>
-			  <td>{{nt.in_product.full_name}}</td>
-			  <td>{{nt.out_product.full_name}}</td>
+			  <td><a href="/view/node_type/{{nt.id}}">{{nt.full_name}}</a></td>
 			  <td>{{nt.value}}</td>
 			  <td>{{nt.power}}</td>
 			  <td>{{nt.capex_cost}}</td>
-		      <td>{{nt.opex_cost}}</td>			  
-			  
+		      <td>{{nt.opex_cost}}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-
+        </div>
+      </section>
 
 {% endblock %}

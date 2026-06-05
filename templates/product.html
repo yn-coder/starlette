@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block links %}
+    {{ super() }}
+{% endblock %}
+
+{% block main %}
+    {{ super() }}
+
+	<h1 class="page-title">Product {{product.full_name}}</h1>
+		<section class="metrics-grid">
+			<div class="card">			
+			<div class="card-title">Out cost</div>		  
+			<div class="card-value">{{product.out_cost}}</div>          
+			</div>
+		</section>
+	
+      <section class="metrics-grid">
+        <div class="card">
+          <div class="card-title">From node types</div>
+		  {% for fn in from_nodes %}
+		  <div class="card-value"><a href="/view/node_type/{{fn.node_type.id}}">{{fn.node_type.full_name}}</a></div>
+          {% endfor %}
+        </div>
+        <div class="card">
+          <div class="card-title">To node types</div>
+          
+   {% for tn in to_nodes %}
+     <div class="card-value"><a href="/view/node_type/{{tn.node_type.id}}">{{tn.node_type.full_name}}</a></div>
+   {% endfor %}
+
+        </div>
+      </section>
+
+
+{% endblock %}

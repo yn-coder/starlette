@@ -1,40 +1,57 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>Concept models</title>
-    <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css">
-	    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept models</title>
+
 	{% block links %}
     {% endblock %}
-	
+  <link rel="stylesheet" href="/statics/css/styles.css">
+  <style>
+
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Start</h1>
-    <p>Concept models</p><nav>
-  
-  
-  <a href="/">Home</a>
-  <a href="/view/products/">Products</a>
-  <a href="/view/node_types/">Node types</a>
-  <a href="/admin">Control panel</a>
-</nav>
-	
-	
-	
-  </header>
 
-  <main>
+  <!-- TRIGGER -->
+  <input type="checkbox" id="sidebar-toggle">
+
+  <div class="dashboard-container">
+
+    <!-- HEADER -->
+    <header class="header">
+      <!-- TOGGLE -->
+      <label for="sidebar-toggle" class="menu-btn">☰</label>
+
+      <div class="user-profile">
+        <div class="avatar">AA</div>
+        <span>AA</span>
+      </div>
+    </header>
+
+    <!-- MENU -->
+    <aside class="sidebar">
+      <div class="brand">🚀 Concept</div>
+      <ul class="nav-links">
+         <li {% if menu_item == "project" %} class="active" {% endif %}><a href="/">Home</a></li>
+		 <li {% if menu_item == "product" %} class="active" {% endif %}><a href="/view/products/">Products</a></li>
+		 <li {% if menu_item == "node" %} class="active" {% endif %}><a href="/view/node_types/">Node types</a></li>
+	     <li {% if menu_item == "tree" %} class="active" {% endif %}><a href="/view/technology_tree/">Technology tree</a></li>
+	     <li><a href="/admin">Control panel</a></li>
+      </ul>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="main-content">
+
     {% block main %}
     {% endblock %}
-	
-  </main>
 
-  <footer>
-    <p>Concept.</p>
-  </footer>
+
+    </main>
+  </div>
+
+
 </body>
 </html>

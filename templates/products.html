@@ -3,9 +3,12 @@
 {% block main %}
     {{ super() }}
 
-	<h1>Products</h1>	
+	<h1 class="page-title">Products</h1>	
 	
 	
+	<section class="data-section">
+        <div class="section-title">Products</div>
+        <div class="table-container">
 	
 	<table>
 		<thead>
@@ -15,12 +18,13 @@
 		<tbody>
 			{% for p in products %}
 			<tr>
-			  <td>{{p.full_name}}</td>
+			  <td><a href="/view/product/{{p.id}}">{{p.full_name}}</a></td>
 			  <td>{{p.out_cost}}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-
+        </div>
+      </section>
 
 {% endblock %}

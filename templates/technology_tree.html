@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block links %}
+    {{ super() }}
+	<script src="https://cdn.plot.ly/plotly-3.3.1.min.js" charset="utf-8"></script>
+
+{% endblock %}
+
+
+{% block main %}
+    {{ super() }}
+
+
+    <h1 class="page-title">Graph (circular layout)</h1>
+	
+	<div id="graph" style="width:800px;height:600px;"></div>
+    
+	<script>fetch('/api/get_tech_graph.json').then(r=>r.json()).then(spec=>Plotly.newPlot('graph', spec.data, spec.layout));</script>
+
+
+{% endblock %}

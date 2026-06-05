@@ -2,3 +2,4 @@ starlette
 SQLAlchemy
 starlette-admin
 jinja2
+networkx

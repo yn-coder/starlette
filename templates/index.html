@@ -9,17 +9,18 @@
 {% block main %}
     {{ super() }}
 
+    <h1 class="page-title">Projects</h1>
 
-	
-
-  <main>
+	<section class="data-section">
+        <div class="section-title">Projects</div>
+        <div class="table-container">
 
 	<table>
 		<thead>
-			<th>Project</th>			
-			<th>Initial product</th>			
-			<th>Finit product</th>			
-			<th>Cost coef</th>			
+			<th>Project</th>
+			<th>Initial product</th>
+			<th>Finit product</th>
+			<th>Cost coef</th>
 		</thead>
 		<tbody>
 			{% for p in projects %}
@@ -31,15 +32,9 @@
 			 </tr>
 			{% endfor %}
 		</tbody>
-	</table>		
-
-	
-  </main>
-
-  <footer>
-    <p>Concepts.</p>
-  </footer>
+	</table>
+        </div>
+      </section>
 
 
-	
 {% endblock %}

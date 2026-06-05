@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block links %}
+    {{ super() }}
+{% endblock %}
+
+{% block main %}
+    {{ super() }}
+
+	<h1 class="page-title">Node type {{node_type.full_name}}</h1>
+
+		<section class="metrics-grid">
+			<div class="card">
+				<div class="card-title">value</div>
+				<div class="card-value">{{node_type.value}}</div>
+			</div>
+			<div class="card">
+				<div class="card-title">power</div>
+				<div class="card-value">{{node_type.power}}</div>
+			</div>
+			<div class="card">
+				<div class="card-title">capex cost</div>
+				<div class="card-value">{{node_type.capex_cost}}</div>
+			</div>
+			<div class="card">
+				<div class="card-title">opex_cost</div>
+				<div class="card-value">{{node_type.opex_cost}}</div>
+			</div>
+		</section>
+
+      <section class="metrics-grid">
+        <div class="card">
+			<div class="card-title">Input products</div>
+
+   {% for ip in in_products %}
+     <div class="card-value"><a href="/view/product/{{ip.product.id}}">{{ip.product.full_name}}</a></div>
+   {% endfor %}
+		</div>
+
+   <div class="card">
+   <div class="card-title">Output products</div>
+   {% for op in out_products %}
+     <div class="card-value"><a href="/view/product/{{op.product.id}}">{{op.product.full_name}}</a></div>
+   {% endfor %}
+
+        </div>
+      </section>
+
+{% endblock %}
