@@ -182,13 +182,6 @@
     th { background-color: var(--bg-primary); color: var(--text-muted); font-size: 0.875rem; }
     tr:hover td { background-color: #f8fafc; }
     
-	.rounded-btn {
-		padding: 10px 20px;
-		border-radius: 8px; /* Subtle rounding */
-		border: 1px solid #ccc;
-		background-color: #28a745;
-		color : white;
-		}
 
     /* ---MOBILE --- */
     @media (max-width: 768px) {
@@ -228,3 +221,44 @@
         color: #fff; /*  */
       }
     }
+	
+	
+/* --- ACTIONS SECTION --- */
+.actions-section {
+  display: flex;
+  gap: 15px;               
+  flex-wrap: wrap;         
+  margin-bottom: 30px;     
+}
+
+.rounded-btn {
+  cursor: pointer;
+  font-weight: 500;
+		border: 1px solid #ccc;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+		padding: 10px 20px;
+		border-radius: 8px; /* Subtle rounding */
+		background-color: #28a745;
+		color : white;
+}
+
+
+.rounded-btn:hover {
+  background-color: #218838; 
+}
+
+.rounded-btn:active {
+  transform: scale(0.98);    
+}
+
+.actions-section .secondary-btn {
+  background-color: #fff;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+.actions-section .secondary-btn:hover {
+  background-color: #f8fafc;
+}
+	
+	

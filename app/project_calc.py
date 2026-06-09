@@ -54,6 +54,10 @@ def Calc_Project( project, session ):
             model_array.append( ( session.get( Product, f ), extr ) )
 
     # calculate
+    
+    # delay for building
+    build_delay = 2
+
     for finit_product, path in model_array:
         new_project_model = Project_Model(
                 project_id = pk,
@@ -68,6 +72,7 @@ def Calc_Project( project, session ):
                 reg_income = 0,
                 reg_power_cost = 0,
                 #bottleneck_node_id = None,
+                building_delay = build_delay,
 
                 project_payback = 0
                 )
@@ -124,7 +129,7 @@ def Calc_Project( project, session ):
             reg_income = finit_product.out_cost * bottleneck_value
 
         if reg_income > reg_opex:
-            project_payback = total_capex / ( reg_income - reg_opex )
+            project_payback = build_delay + ( total_capex / ( reg_income - reg_opex ) )
 
         #print( reg_income )
         #print( reg_opex )
@@ -147,13 +152,22 @@ def Calc_Project( project, session ):
         session.commit()
 
         for i in range(10):
+            if i < build_delay:
+                year_balance = - total_capex
+                year_income = 0
+                year_opex = 0
+            else:
+                year_balance = ( i * ( reg_income - reg_opex ) ) - total_capex
+                year_income = reg_income
+                year_opex = reg_opex
+                
             pm_cf = Project_Model_Cashflow(
                 project_model_id = new_project_model.id,
                 project_id = pk,
                 year = i,
-                balance = ( i * ( reg_income - reg_opex ) ) - total_capex,
-                income = reg_income,
-                opex = reg_opex
+                balance = year_balance,
+                income = year_income,
+                opex = year_opex
               )
             session.add(pm_cf)
             session.commit()

@@ -29,7 +29,7 @@
 				{% else %}
 				-
 			{% endif %}
-			</div>	
+			</div>
 		</div>
 		<div class="card">
 			<div class="card-title">power cost</div>
@@ -80,9 +80,11 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
 
 </script>
 	{% endif %}
-	
+
 	<h1 class="page-title">Calculate</h1>
-	<p>
+
+	<section class="actions-section">
+
 	{% if can_calculate_flag %}
 		<a class="rounded-btn" href="/view/project/{{project.id}}/calc" >Calculate project</a>
 		<u>This will drops all of the previous calculations.</u>
@@ -90,7 +92,7 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
 	    <button disabled="disabled">Calculate project</button>
 		<u>You can't calculate without initial product.</u>
 	{% endif %}
-	</p>
+	</section>
 
 
 	<h1 class="page-title">Models</h1>
@@ -108,9 +110,10 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
 		<th>Total capex</th>
 		<th>Value</th>
 		<th>Power</th>
-		<th>reg_opex</th>
-		<th>reg_income</th>
-		<th>reg_power_cost</th>
+		<th>reg opex</th>
+		<th>reg income</th>
+		<th>reg power cost</th>
+		<th>building delay</th>
 		<th>Payback</th>
 		<th>Bottleneck node</th>
 	</thead>
@@ -138,6 +141,7 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
 		  <td style="text-align: right;">{{ "{:_.2f}".format(m.reg_opex ) }}</td>
 		  <td style="text-align: right;">{{ "{:_.2f}".format(m.reg_income) }}</td>
 		  <td style="text-align: right;">{{ "{:_.2f}".format(m.reg_power_cost) }}</td>
+		  <td style="text-align: right;">{{ m.building_delay }}</td>
 		  <td style="text-align: right;">{{ m.project_payback }}</td>
 		  <td>{% if m.bottleneck_node %} {{ m.bottleneck_node.node_type.full_name }} {% endif %}</td>
 		</tr>
@@ -158,11 +162,11 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
 	{% endif %}
 
 	<h2>Nodes</h2>
-	
+
       <section class="data-section">
         <div class="section-title">Nodes</div>
         <div class="table-container">
-		
+
 		<table>
 		<thead>
 			<th>Step</th>
@@ -197,7 +201,34 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
 		</tbody>
 	</table>
       </section>
-	  
+
+    <p>CAPEX by nodes</p>
+	<div id="pieCapexChart" style="width: 100%; max-width: 600px; height: 400px;"></div>
+
+	<script>
+        const data = [{
+            values: [
+				{% for n in project_nodes %}
+				{{n.capex_cost}},
+				{% endfor %}
+			],
+            labels: [
+			{% for n in project_nodes %}
+				'{{n.node_type.full_name}}',
+				{% endfor %}
+
+			],
+            type: 'pie'
+        }];
+
+        const layout = {
+            title: 'CAPEX by nodes'
+        };
+
+        Plotly.newPlot('pieCapexChart', data, layout);
+    </script>
+
+    <p>Node values</p>
 	<div id='Node_Value_Chart'></div>
 	<script>
 var data_nv = [{type: 'funnel',
@@ -222,8 +253,8 @@ Plotly.newPlot('Node_Value_Chart', data_nv, layout_nv);
 
 	</script>
 
-	<h2>Cost</h2>	
-	
+	<h2>Cost</h2>
+
       <section class="metrics-grid">
         <div class="card">
           <div class="card-title">capex</div>
@@ -245,12 +276,12 @@ Plotly.newPlot('Node_Value_Chart', data_nv, layout_nv);
           <div class="card-title">bottleneck value</div>
           <div class="card-value">{{bottleneck_value}}</div>
         </div>
-		{% if bottleneck_node %}		
+		{% if bottleneck_node %}
         <div class="card">
           <div class="card-title">bottleneck node</div>
           <div class="card-value">{{bottleneck_node.node_type.full_name}}</div>
         </div>
-		{% endif %}		
+		{% endif %}
       </section>
 
       <section class="data-section">

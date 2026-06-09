@@ -171,6 +171,7 @@ class Project_Model(Base):
     bottleneck_node_id : Mapped[int] = mapped_column(ForeignKey("project_model_node.id"), nullable=True )
     bottleneck_node = relationship( "Project_Model_Node", foreign_keys=[bottleneck_node_id])
 
+    building_delay : Mapped[float]
     project_payback : Mapped[float]
 
 # Project model nodes
