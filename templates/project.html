@@ -203,7 +203,7 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
       </section>
 
     <p>CAPEX by nodes</p>
-	<div id="pieCapexChart" style="width: 100%; max-width: 600px; height: 400px;"></div>
+	<div id="pieCapexChart" style="width: 100%; max-width: 800px; height: 400px;"></div>
 
 	<script>
         const data = [{
@@ -231,8 +231,11 @@ Plotly.newPlot('Map_Chart', [tracePoint], layout);
     <p>Node values</p>
 	<div id='Node_Value_Chart'></div>
 	<script>
-var data_nv = [{type: 'funnel',
+var data_nv = [
 
+{type: 'funnel',
+
+    name: 'Bottlenecked flow',
 y: [
 {% for n in project_nodes %}
 "{{n.node_type.full_name}}",
@@ -242,14 +245,54 @@ x: [
 
 
 {% for n in project_nodes %}
-"{{n.value}}",
+
+{{ view_model.bottleneck_node.node_type.value }},
+
 {% endfor %}
 ],
 
-hoverinfo: 'x+percent previous+percent initial'}];
+hoverinfo: 'x+percent previous+percent initial',
+    textinfo: "value"
+},
 
-var layout_nv = {margin: {l: 150}, width:600, height: 500}
+{type: 'funnel',
+
+    name: 'Missed flow',
+y: [
+{% for n in project_nodes %}
+"{{n.node_type.full_name}}",
+{% endfor %}
+],
+x: [
+
+
+{% for n in project_nodes %}
+{{n.value - view_model.bottleneck_node.node_type.value }},
+{% endfor %}
+],
+
+hoverinfo: 'x+percent previous+percent initial',
+    textinfo: "value"
+}
+
+
+];
+
+var layout_nv = {margin: {l: 150}, width:800, height: 500,
+  funnelmode: "stack", // This enables the stacking behavior
+  showlegend: true
+  
+  };
+  
 Plotly.newPlot('Node_Value_Chart', data_nv, layout_nv);
+
+
+
+
+
+
+
+
 
 	</script>
 
